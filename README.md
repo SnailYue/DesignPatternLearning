@@ -1,2 +1,2 @@
 # DesignPatternLearning
-Java 23中设计模式
+Java 23种设计模式
