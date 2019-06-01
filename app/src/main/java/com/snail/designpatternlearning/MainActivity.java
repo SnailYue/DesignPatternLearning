@@ -9,6 +9,9 @@ import com.snail.designpatternlearning.BuilderMethod.AppleComputerBuilder;
 import com.snail.designpatternlearning.BuilderMethod.Computer;
 import com.snail.designpatternlearning.BuilderMethod.Director;
 import com.snail.designpatternlearning.BuilderMethod.SurfaceComputerBuilder;
+import com.snail.designpatternlearning.IteratorMethod.Iterator;
+import com.snail.designpatternlearning.IteratorMethod.Phone;
+import com.snail.designpatternlearning.IteratorMethod.PhoneCollection;
 import com.snail.designpatternlearning.SingleInstanceMethod.Book;
 import com.snail.designpatternlearning.SingleInstanceMethod.Car;
 
@@ -23,17 +26,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initData() {
-        /**
-         * 建造者模式
-         */
         builderMothod();
-
-        /**
-         * 建造者模式的链式调用
-         */
         buildAbstractMathod();
+        singelInstanceMathod();
+        iteratorMathod();
     }
 
+
+    /**
+     * 建造者模式
+     */
     public void builderMothod() {
         Director director = new Director(new AppleComputerBuilder());
         Computer computer = director.construct();
@@ -50,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "builderMothod: disPlay = " + computer.getDisPlay());
     }
 
+
+    /**
+     * 建造者模式的链式调用
+     */
     public void buildAbstractMathod() {
         MobilePhone mobilePhone = new MobilePhone.Builder()
                 .CPU("A12")
@@ -61,7 +67,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void singelInstanceMathod(){
+    /**
+     * 单例模式
+     */
+    public void singelInstanceMathod() {
         /**
          * 懒汉单例模式
          */
@@ -71,5 +80,21 @@ public class MainActivity extends AppCompatActivity {
          * 恶汉单例模式
          */
         Book book = Book.getInstance();
+    }
+
+    /**
+     * 迭代器模式
+     */
+
+    public void iteratorMathod() {
+        PhoneCollection<Phone> phoneCollection = new PhoneCollection<>();
+        phoneCollection.add(new Phone("Apple", "High", 8899));
+        phoneCollection.add(new Phone("HUAWEI", "Hight", 10299));
+
+        Iterator<Phone> iterator = phoneCollection.iterator();
+        while (iterator.hasNext()) {
+            Log.d(TAG, "iteratorMathod: " + iterator.next());
+        }
+
     }
 }
