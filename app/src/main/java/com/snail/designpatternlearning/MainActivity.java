@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.snail.designpatternlearning.AbstractBuilderMethod.MobilePhone;
+import com.snail.designpatternlearning.AdapterMethod.Adapter;
+import com.snail.designpatternlearning.AdapterMethod.TypeC;
+import com.snail.designpatternlearning.AdapterMethod.TypeCAdapter;
+import com.snail.designpatternlearning.AdapterMethod.Usb;
 import com.snail.designpatternlearning.BuilderMethod.AppleComputerBuilder;
 import com.snail.designpatternlearning.BuilderMethod.Computer;
 import com.snail.designpatternlearning.BuilderMethod.Director;
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         buildAbstractMathod();
         singelInstanceMathod();
         iteratorMathod();
+        adapterMathod();
     }
 
 
@@ -96,5 +101,13 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "iteratorMathod: " + iterator.next());
         }
 
+    }
+
+    /**
+     * 适配器模式
+     */
+    public void adapterMathod(){
+        Adapter<TypeC> adapter = new TypeCAdapter(new Usb("this is usb data"));
+        Log.d(TAG, "adapterMathod: type C data : " +((TypeCAdapter) adapter).getTransformObject());
     }
 }
