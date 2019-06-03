@@ -18,6 +18,9 @@ import com.snail.designpatternlearning.IteratorMethod.Phone;
 import com.snail.designpatternlearning.IteratorMethod.PhoneCollection;
 import com.snail.designpatternlearning.SingleInstanceMethod.Book;
 import com.snail.designpatternlearning.SingleInstanceMethod.Car;
+import com.snail.designpatternlearning.TemplateMethod.BMWCar;
+import com.snail.designpatternlearning.TemplateMethod.BenzCar;
+import com.snail.designpatternlearning.TemplateMethod.CarTemplate;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         singelInstanceMathod();
         iteratorMathod();
         adapterMathod();
+        templateMethod();
     }
 
 
@@ -106,8 +110,19 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 适配器模式
      */
-    public void adapterMathod(){
+    public void adapterMathod() {
         Adapter<TypeC> adapter = new TypeCAdapter(new Usb("this is usb data"));
-        Log.d(TAG, "adapterMathod: type C data : " +((TypeCAdapter) adapter).getTransformObject());
+        Log.d(TAG, "adapterMathod: type C data : " + ((TypeCAdapter) adapter).getTransformObject());
+    }
+
+
+    /**
+     * 模板模式
+     */
+    public void templateMethod() {
+        CarTemplate benz = new BenzCar();
+        benz.buildCar();
+        CarTemplate bmw = new BMWCar();
+        bmw.buildCar();
     }
 }
