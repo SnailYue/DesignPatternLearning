@@ -13,14 +13,25 @@ import com.snail.designpatternlearning.BuilderMethod.AppleComputerBuilder;
 import com.snail.designpatternlearning.BuilderMethod.Computer;
 import com.snail.designpatternlearning.BuilderMethod.Director;
 import com.snail.designpatternlearning.BuilderMethod.SurfaceComputerBuilder;
+import com.snail.designpatternlearning.FactoryMethod.Factory;
+import com.snail.designpatternlearning.FactoryMethod.IDCardFactory;
+import com.snail.designpatternlearning.FactoryMethod.Product;
 import com.snail.designpatternlearning.IteratorMethod.Iterator;
 import com.snail.designpatternlearning.IteratorMethod.Phone;
 import com.snail.designpatternlearning.IteratorMethod.PhoneCollection;
+import com.snail.designpatternlearning.SimpleFactoryMethod.EasyFactory;
+import com.snail.designpatternlearning.SimpleFactoryMethod.Operation;
 import com.snail.designpatternlearning.SingleInstanceMethod.Book;
 import com.snail.designpatternlearning.SingleInstanceMethod.Car;
 import com.snail.designpatternlearning.TemplateMethod.BMWCar;
 import com.snail.designpatternlearning.TemplateMethod.BenzCar;
 import com.snail.designpatternlearning.TemplateMethod.CarTemplate;
+
+/**
+ * @Author Snail
+ * Date 2019/6/3
+ * Email yuesnail@gmail.com
+ */
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -39,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         iteratorMathod();
         adapterMathod();
         templateMethod();
+        simpleFactoryMethod();
+        factoryMethod();
     }
 
 
@@ -124,5 +137,38 @@ public class MainActivity extends AppCompatActivity {
         benz.buildCar();
         CarTemplate bmw = new BMWCar();
         bmw.buildCar();
+    }
+
+
+    /**
+     * 简单工厂模式
+     */
+    public void simpleFactoryMethod() {
+        try {
+            Operation add = EasyFactory.createOperation("+");
+            add.getResult(5, 3);
+            Operation sub = EasyFactory.createOperation("-");
+            sub.getResult(4, 1);
+            Operation mul = EasyFactory.createOperation("*");
+            mul.getResult(2, 3);
+            Operation div = EasyFactory.createOperation("/");
+            div.getResult(4, 8);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 工厂方法模式
+     */
+
+    public void factoryMethod(){
+        Factory factory = new IDCardFactory();
+        Product card_1 = factory.create("Jack");
+        Product card_2 = factory.create("Mark");
+        Product card_3 = factory.create("Tom");
+        card_1.use();
+        card_2.use();
+        card_3.use();
     }
 }
