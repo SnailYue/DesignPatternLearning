@@ -19,6 +19,10 @@ import com.snail.designpatternlearning.FactoryMethod.Product;
 import com.snail.designpatternlearning.IteratorMethod.Iterator;
 import com.snail.designpatternlearning.IteratorMethod.Phone;
 import com.snail.designpatternlearning.IteratorMethod.PhoneCollection;
+import com.snail.designpatternlearning.PrototypeMethod.ElectronicsProduct;
+import com.snail.designpatternlearning.PrototypeMethod.IPadLine;
+import com.snail.designpatternlearning.PrototypeMethod.IPhoneLine;
+import com.snail.designpatternlearning.PrototypeMethod.Manager;
 import com.snail.designpatternlearning.SimpleFactoryMethod.EasyFactory;
 import com.snail.designpatternlearning.SimpleFactoryMethod.Operation;
 import com.snail.designpatternlearning.SingleInstanceMethod.Book;
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         templateMethod();
         simpleFactoryMethod();
         factoryMethod();
+        prototypeMethod();
     }
 
 
@@ -162,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
      * 工厂方法模式
      */
 
-    public void factoryMethod(){
+    public void factoryMethod() {
         Factory factory = new IDCardFactory();
         Product card_1 = factory.create("Jack");
         Product card_2 = factory.create("Mark");
@@ -170,5 +175,20 @@ public class MainActivity extends AppCompatActivity {
         card_1.use();
         card_2.use();
         card_3.use();
+    }
+
+    /**
+     * 原型模式
+     */
+    public void prototypeMethod() {
+        Manager manager = new Manager();
+        IPadLine iPadLine = new IPadLine();
+        IPhoneLine iPhoneLine = new IPhoneLine();
+        manager.register("iPad", iPadLine);
+        manager.register("iPhone", iPhoneLine);
+        ElectronicsProduct iPad = manager.create("iPad");
+        iPad.makeProduct("iPad");
+        ElectronicsProduct iPhone = manager.create("iPhone");
+        iPhone.makeProduct("iPhone");
     }
 }
