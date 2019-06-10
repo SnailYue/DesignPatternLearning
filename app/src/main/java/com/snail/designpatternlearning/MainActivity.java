@@ -9,6 +9,13 @@ import com.snail.designpatternlearning.AdapterMethod.Adapter;
 import com.snail.designpatternlearning.AdapterMethod.TypeC;
 import com.snail.designpatternlearning.AdapterMethod.TypeCAdapter;
 import com.snail.designpatternlearning.AdapterMethod.Usb;
+import com.snail.designpatternlearning.BridgeMethod.AbstractMessage;
+import com.snail.designpatternlearning.BridgeMethod.CommonMessage;
+import com.snail.designpatternlearning.BridgeMethod.Message;
+import com.snail.designpatternlearning.BridgeMethod.MessageEmail;
+import com.snail.designpatternlearning.BridgeMethod.MessageImpl;
+import com.snail.designpatternlearning.BridgeMethod.MessageSMS;
+import com.snail.designpatternlearning.BridgeMethod.UrgencyMessage;
 import com.snail.designpatternlearning.BuilderMethod.AppleComputerBuilder;
 import com.snail.designpatternlearning.BuilderMethod.Computer;
 import com.snail.designpatternlearning.BuilderMethod.Director;
@@ -57,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         simpleFactoryMethod();
         factoryMethod();
         prototypeMethod();
+        bridgeMethod();
     }
 
 
@@ -190,5 +198,18 @@ public class MainActivity extends AppCompatActivity {
         iPad.makeProduct("iPad");
         ElectronicsProduct iPhone = manager.create("iPhone");
         iPhone.makeProduct("iPhone");
+    }
+
+    /**
+     * 桥梁模式
+     */
+    public void bridgeMethod() {
+        MessageImpl message = new MessageSMS();
+        AbstractMessage abstractMessage = new CommonMessage(message);
+        abstractMessage.sendMessage(new Message("Jack Ma", "马总晚上7点开会"));
+
+        message = new MessageEmail();
+        abstractMessage = new UrgencyMessage(message);
+        abstractMessage.sendMessage(new Message("Pony Ma", "明天晚上七点收购英雄联盟游戏会议"));
     }
 }
