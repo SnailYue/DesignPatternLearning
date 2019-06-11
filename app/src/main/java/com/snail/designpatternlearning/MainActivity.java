@@ -34,9 +34,15 @@ import com.snail.designpatternlearning.SimpleFactoryMethod.EasyFactory;
 import com.snail.designpatternlearning.SimpleFactoryMethod.Operation;
 import com.snail.designpatternlearning.SingleInstanceMethod.Book;
 import com.snail.designpatternlearning.SingleInstanceMethod.Car;
+import com.snail.designpatternlearning.StrategyMethod.IStrategy;
+import com.snail.designpatternlearning.StrategyMethod.OldCustomerQuoteStrategy;
+import com.snail.designpatternlearning.StrategyMethod.QuoteContext;
+import com.snail.designpatternlearning.StrategyMethod.VIPCustomerQuoteStrategy;
 import com.snail.designpatternlearning.TemplateMethod.BMWCar;
 import com.snail.designpatternlearning.TemplateMethod.BenzCar;
 import com.snail.designpatternlearning.TemplateMethod.CarTemplate;
+
+import java.math.BigDecimal;
 
 /**
  * @Author Snail
@@ -65,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         factoryMethod();
         prototypeMethod();
         bridgeMethod();
+        strategyMethod();
     }
 
 
@@ -74,17 +81,17 @@ public class MainActivity extends AppCompatActivity {
     public void builderMothod() {
         Director director = new Director(new AppleComputerBuilder());
         Computer computer = director.construct();
-        Log.d(TAG, "builderMothod: cpu = " + computer.getCPU());
-        Log.d(TAG, "builderMothod: graphics = " + computer.getGraphics());
-        Log.d(TAG, "builderMothod: mainBoard = " + computer.getMainBoard());
-        Log.d(TAG, "builderMothod: disPlay = " + computer.getDisPlay());
+        Log.d(TAG, "builderMothod: cpu = " + computer.getCPU() +
+                ",graphics = " + computer.getGraphics() +
+                ",mainBoard = " + computer.getMainBoard() +
+                ",disPlay = " + computer.getDisPlay());
 
         Director director1 = new Director(new SurfaceComputerBuilder());
         Computer computer1 = director.construct();
-        Log.d(TAG, "builderMothod: cpu = " + computer.getCPU());
-        Log.d(TAG, "builderMothod: graphics = " + computer.getGraphics());
-        Log.d(TAG, "builderMothod: mainBoard = " + computer.getMainBoard());
-        Log.d(TAG, "builderMothod: disPlay = " + computer.getDisPlay());
+        Log.d(TAG, "builderMothod: cpu = " + computer.getCPU() +
+                ",graphics = " + computer.getGraphics() +
+                ",mainBoard = " + computer.getMainBoard() +
+                ",disPlay = " + computer.getDisPlay());
     }
 
 
@@ -211,5 +218,20 @@ public class MainActivity extends AppCompatActivity {
         message = new MessageEmail();
         abstractMessage = new UrgencyMessage(message);
         abstractMessage.sendMessage(new Message("Pony Ma", "明天晚上七点收购英雄联盟游戏会议"));
+    }
+
+    /**
+     * 策略模式
+     */
+    public void strategyMethod() {
+        IStrategy oldPriceStrategy = new OldCustomerQuoteStrategy();
+        QuoteContext quoteContext = new QuoteContext(oldPriceStrategy);
+        BigDecimal newPrice = quoteContext.getPrice(new BigDecimal(100));
+        Log.d(TAG, "strategyMethod: oldCustomer's price is " + newPrice);
+
+        oldPriceStrategy = new VIPCustomerQuoteStrategy();
+        quoteContext = new QuoteContext(oldPriceStrategy);
+        newPrice = quoteContext.getPrice(new BigDecimal(100));
+        Log.d(TAG, "strategyMethod: VIPCustomer's price is " + newPrice);
     }
 }
