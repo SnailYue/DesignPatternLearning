@@ -20,6 +20,9 @@ import com.snail.designpatternlearning.BuilderMethod.AppleComputerBuilder;
 import com.snail.designpatternlearning.BuilderMethod.Computer;
 import com.snail.designpatternlearning.BuilderMethod.Director;
 import com.snail.designpatternlearning.BuilderMethod.SurfaceComputerBuilder;
+import com.snail.designpatternlearning.CompositeMethod.Directory;
+import com.snail.designpatternlearning.CompositeMethod.Entry;
+import com.snail.designpatternlearning.CompositeMethod.File;
 import com.snail.designpatternlearning.FactoryMethod.Factory;
 import com.snail.designpatternlearning.FactoryMethod.IDCardFactory;
 import com.snail.designpatternlearning.FactoryMethod.Product;
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         prototypeMethod();
         bridgeMethod();
         strategyMethod();
+        compositeMethod();
     }
 
 
@@ -233,5 +237,21 @@ public class MainActivity extends AppCompatActivity {
         quoteContext = new QuoteContext(oldPriceStrategy);
         newPrice = quoteContext.getPrice(new BigDecimal(100));
         Log.d(TAG, "strategyMethod: VIPCustomer's price is " + newPrice);
+    }
+
+    /**
+     * 组合模式
+     */
+    public void compositeMethod() {
+        Entry rootDir = new Directory("root");
+        Entry binDir = new Directory("bin");
+        Entry tmpDir = new Directory("tmp");
+        Entry usrDir = new Directory("usr");
+        rootDir.add(binDir);
+        rootDir.add(tmpDir);
+        rootDir.add(usrDir);
+        binDir.add(new File("wechat", 50));
+        usrDir.add(new File("qq", 100));
+        rootDir.printList();
     }
 }
