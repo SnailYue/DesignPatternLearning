@@ -23,6 +23,10 @@ import com.snail.designpatternlearning.BuilderMethod.SurfaceComputerBuilder;
 import com.snail.designpatternlearning.CompositeMethod.Directory;
 import com.snail.designpatternlearning.CompositeMethod.Entry;
 import com.snail.designpatternlearning.CompositeMethod.File;
+import com.snail.designpatternlearning.DecoratorMethod.Bubble;
+import com.snail.designpatternlearning.DecoratorMethod.CaremeMilkTea;
+import com.snail.designpatternlearning.DecoratorMethod.MilkTea;
+import com.snail.designpatternlearning.DecoratorMethod.Pudding;
 import com.snail.designpatternlearning.FactoryMethod.Factory;
 import com.snail.designpatternlearning.FactoryMethod.IDCardFactory;
 import com.snail.designpatternlearning.FactoryMethod.Product;
@@ -76,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         bridgeMethod();
         strategyMethod();
         compositeMethod();
+        decoratorMethod();
     }
 
 
@@ -253,5 +258,17 @@ public class MainActivity extends AppCompatActivity {
         binDir.add(new File("wechat", 50));
         usrDir.add(new File("qq", 100));
         rootDir.printList();
+    }
+
+    /**
+     * 装饰器模式
+     */
+    public void decoratorMethod() {
+        MilkTea milkTea = new CaremeMilkTea();
+        Log.d(TAG, "decoratorMethod: milkTea is " + milkTea.getMaterial() + ", the price is " + milkTea.getTotalPrice());
+        milkTea = new Pudding(milkTea);
+        Log.d(TAG, "decoratorMethod: milkTea is " + milkTea.getMaterial() + ", the price is " + milkTea.getTotalPrice());
+        milkTea = new Bubble(milkTea);
+        Log.d(TAG, "decoratorMethod: milkTea is " + milkTea.getMaterial() + ", the price is " + milkTea.getTotalPrice());
     }
 }
