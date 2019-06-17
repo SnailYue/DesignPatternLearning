@@ -20,6 +20,12 @@ import com.snail.designpatternlearning.BuilderMethod.AppleComputerBuilder;
 import com.snail.designpatternlearning.BuilderMethod.Computer;
 import com.snail.designpatternlearning.BuilderMethod.Director;
 import com.snail.designpatternlearning.BuilderMethod.SurfaceComputerBuilder;
+import com.snail.designpatternlearning.ChainOfResponsibilityMethod.FightHandler;
+import com.snail.designpatternlearning.ChainOfResponsibilityMethod.HeadmanFightHandler;
+import com.snail.designpatternlearning.ChainOfResponsibilityMethod.MasterFightHandler;
+import com.snail.designpatternlearning.ChainOfResponsibilityMethod.Protagonist;
+import com.snail.designpatternlearning.ChainOfResponsibilityMethod.SelfFightHandler;
+import com.snail.designpatternlearning.ChainOfResponsibilityMethod.TogetherFightHandler;
 import com.snail.designpatternlearning.CompositeMethod.Directory;
 import com.snail.designpatternlearning.CompositeMethod.Entry;
 import com.snail.designpatternlearning.CompositeMethod.File;
@@ -81,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         strategyMethod();
         compositeMethod();
         decoratorMethod();
+        chainOfResponbility();
     }
 
 
@@ -270,5 +277,28 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "decoratorMethod: milkTea is " + milkTea.getMaterial() + ", the price is " + milkTea.getTotalPrice());
         milkTea = new Bubble(milkTea);
         Log.d(TAG, "decoratorMethod: milkTea is " + milkTea.getMaterial() + ", the price is " + milkTea.getTotalPrice());
+    }
+
+    /**
+     * 责任链模式
+     */
+    public void chainOfResponbility() {
+        FightHandler selfHandler = new SelfFightHandler();
+        FightHandler masterHandler = new MasterFightHandler();
+        FightHandler headmenHandler = new HeadmanFightHandler();
+        FightHandler togetherHandler = new TogetherFightHandler();
+
+        selfHandler.setSuccessor(masterHandler);
+        masterHandler.setSuccessor(headmenHandler);
+        headmenHandler.setSuccessor(togetherHandler);
+
+        Protagonist songqingshu = new Protagonist("宋青书", 18, 88);
+        selfHandler.fightWith(songqingshu);
+
+        Protagonist songyuanqiao = new Protagonist("宋远桥", 37, 180);
+        selfHandler.fightWith(songyuanqiao);
+
+        Protagonist zhangsanfeng = new Protagonist("张三丰", 90, 280);
+        selfHandler.fightWith(zhangsanfeng);
     }
 }
