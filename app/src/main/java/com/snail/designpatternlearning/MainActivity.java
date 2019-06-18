@@ -103,11 +103,11 @@ public class MainActivity extends AppCompatActivity {
                 ",disPlay = " + computer.getDisPlay());
 
         Director director1 = new Director(new SurfaceComputerBuilder());
-        Computer computer1 = director.construct();
-        Log.d(TAG, "builderMothod: cpu = " + computer.getCPU() +
-                ",graphics = " + computer.getGraphics() +
-                ",mainBoard = " + computer.getMainBoard() +
-                ",disPlay = " + computer.getDisPlay());
+        Computer computer1 = director1.construct();
+        Log.d(TAG, "builderMothod: cpu = " + computer1.getCPU() +
+                ",graphics = " + computer1.getGraphics() +
+                ",mainBoard = " + computer1.getMainBoard() +
+                ",disPlay = " + computer1.getDisPlay());
     }
 
 
