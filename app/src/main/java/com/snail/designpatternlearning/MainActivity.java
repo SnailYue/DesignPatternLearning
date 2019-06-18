@@ -33,6 +33,10 @@ import com.snail.designpatternlearning.DecoratorMethod.Bubble;
 import com.snail.designpatternlearning.DecoratorMethod.CaremeMilkTea;
 import com.snail.designpatternlearning.DecoratorMethod.MilkTea;
 import com.snail.designpatternlearning.DecoratorMethod.Pudding;
+import com.snail.designpatternlearning.FacadeMethod.Benz;
+import com.snail.designpatternlearning.FacadeMethod.CarFrame;
+import com.snail.designpatternlearning.FacadeMethod.Giti;
+import com.snail.designpatternlearning.FacadeMethod.Michelin;
 import com.snail.designpatternlearning.FactoryMethod.Factory;
 import com.snail.designpatternlearning.FactoryMethod.IDCardFactory;
 import com.snail.designpatternlearning.FactoryMethod.Product;
@@ -88,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         compositeMethod();
         decoratorMethod();
         chainOfResponbility();
+        faradeMethod();
     }
 
 
@@ -300,5 +305,16 @@ public class MainActivity extends AppCompatActivity {
 
         Protagonist zhangsanfeng = new Protagonist("张三丰", 90, 280);
         selfHandler.fightWith(zhangsanfeng);
+    }
+
+
+    /**
+     * 外观模式
+     */
+    public void faradeMethod() {
+        CarFrame carFrame = new CarFrame(new Benz(), new Giti());
+        carFrame.drive();
+        carFrame.setTyre(new Michelin());
+        carFrame.drive();
     }
 }
