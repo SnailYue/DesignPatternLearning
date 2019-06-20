@@ -43,6 +43,12 @@ import com.snail.designpatternlearning.FactoryMethod.Product;
 import com.snail.designpatternlearning.IteratorMethod.Iterator;
 import com.snail.designpatternlearning.IteratorMethod.Phone;
 import com.snail.designpatternlearning.IteratorMethod.PhoneCollection;
+import com.snail.designpatternlearning.MediatorMethod.BathDevice;
+import com.snail.designpatternlearning.MediatorMethod.CurtainDevice;
+import com.snail.designpatternlearning.MediatorMethod.CustomerMediator;
+import com.snail.designpatternlearning.MediatorMethod.MusicDevice;
+import com.snail.designpatternlearning.MediatorMethod.SmartDevice;
+import com.snail.designpatternlearning.MediatorMethod.SmartMediator;
 import com.snail.designpatternlearning.PrototypeMethod.ElectronicsProduct;
 import com.snail.designpatternlearning.PrototypeMethod.IPadLine;
 import com.snail.designpatternlearning.PrototypeMethod.IPhoneLine;
@@ -93,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         decoratorMethod();
         chainOfResponbility();
         faradeMethod();
+        mediatorMethod();
     }
 
 
@@ -316,5 +323,18 @@ public class MainActivity extends AppCompatActivity {
         carFrame.drive();
         carFrame.setTyre(new Michelin());
         carFrame.drive();
+    }
+
+
+    /**
+     * 中介者模式
+     */
+    public void mediatorMethod() {
+        SmartDevice bd = new BathDevice();
+        SmartDevice cd = new CurtainDevice();
+        SmartDevice md = new MusicDevice();
+        SmartMediator sm = new CustomerMediator(bd, cd, md);
+        cd.operateDevice("open", sm);
+        md.operateDevice("close", sm);
     }
 }
