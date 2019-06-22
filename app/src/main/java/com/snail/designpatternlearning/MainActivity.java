@@ -49,6 +49,10 @@ import com.snail.designpatternlearning.MediatorMethod.CustomerMediator;
 import com.snail.designpatternlearning.MediatorMethod.MusicDevice;
 import com.snail.designpatternlearning.MediatorMethod.SmartDevice;
 import com.snail.designpatternlearning.MediatorMethod.SmartMediator;
+import com.snail.designpatternlearning.ObserverMethod.ConcreteObserver;
+import com.snail.designpatternlearning.ObserverMethod.ConcreteSubject;
+import com.snail.designpatternlearning.ObserverMethod.Observer;
+import com.snail.designpatternlearning.ObserverMethod.Subject;
 import com.snail.designpatternlearning.PrototypeMethod.ElectronicsProduct;
 import com.snail.designpatternlearning.PrototypeMethod.IPadLine;
 import com.snail.designpatternlearning.PrototypeMethod.IPhoneLine;
@@ -100,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
         chainOfResponbility();
         faradeMethod();
         mediatorMethod();
+        observerMethod();
     }
 
 
@@ -336,5 +341,17 @@ public class MainActivity extends AppCompatActivity {
         SmartMediator sm = new CustomerMediator(bd, cd, md);
         cd.operateDevice("open", sm);
         md.operateDevice("close", sm);
+    }
+
+
+    /**
+     * 观察者模式
+     */
+    public void observerMethod() {
+        Subject subject = new ConcreteSubject();
+        Observer observer = new ConcreteObserver();
+        subject.attach(observer);
+        ((ConcreteSubject) subject).change("yellow");
+
     }
 }
