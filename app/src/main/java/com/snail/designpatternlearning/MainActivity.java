@@ -49,6 +49,8 @@ import com.snail.designpatternlearning.MediatorMethod.CustomerMediator;
 import com.snail.designpatternlearning.MediatorMethod.MusicDevice;
 import com.snail.designpatternlearning.MediatorMethod.SmartDevice;
 import com.snail.designpatternlearning.MediatorMethod.SmartMediator;
+import com.snail.designpatternlearning.MementoMethod.Caretaker;
+import com.snail.designpatternlearning.MementoMethod.Originator;
 import com.snail.designpatternlearning.ObserverMethod.ConcreteObserver;
 import com.snail.designpatternlearning.ObserverMethod.ConcreteSubject;
 import com.snail.designpatternlearning.ObserverMethod.Observer;
@@ -105,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         faradeMethod();
         mediatorMethod();
         observerMethod();
+        mementoMethod();
     }
 
 
@@ -354,4 +357,15 @@ public class MainActivity extends AppCompatActivity {
         ((ConcreteSubject) subject).change("yellow");
 
     }
+
+    /**
+     * 备忘录模式
+     */
+    public void mementoMethod() {
+        Originator originator = new Originator();
+        Caretaker caretaker = new Caretaker();
+        caretaker.setMemento(originator.createMemento());
+        originator.resetMemento(caretaker.getMemento());
+    }
+    
 }
