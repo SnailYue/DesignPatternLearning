@@ -63,6 +63,9 @@ import com.snail.designpatternlearning.SimpleFactoryMethod.EasyFactory;
 import com.snail.designpatternlearning.SimpleFactoryMethod.Operation;
 import com.snail.designpatternlearning.SingleInstanceMethod.Book;
 import com.snail.designpatternlearning.SingleInstanceMethod.Car;
+import com.snail.designpatternlearning.StateMethod.DayState;
+import com.snail.designpatternlearning.StateMethod.SafeHome;
+import com.snail.designpatternlearning.StateMethod.State;
 import com.snail.designpatternlearning.StrategyMethod.IStrategy;
 import com.snail.designpatternlearning.StrategyMethod.OldCustomerQuoteStrategy;
 import com.snail.designpatternlearning.StrategyMethod.QuoteContext;
@@ -72,6 +75,7 @@ import com.snail.designpatternlearning.TemplateMethod.BenzCar;
 import com.snail.designpatternlearning.TemplateMethod.CarTemplate;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 
 /**
  * @Author Snail
@@ -108,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         mediatorMethod();
         observerMethod();
         mementoMethod();
+        stateMethod();
     }
 
 
@@ -367,5 +372,13 @@ public class MainActivity extends AppCompatActivity {
         caretaker.setMemento(originator.createMemento());
         originator.resetMemento(caretaker.getMemento());
     }
-    
+
+    /**
+     * 状态模式
+     */
+    public void stateMethod() {
+        SafeHome safeHome = new SafeHome();
+        safeHome.setLock(Calendar.HOUR_OF_DAY);
+        safeHome.recordLog("使用库房");
+    }
 }
