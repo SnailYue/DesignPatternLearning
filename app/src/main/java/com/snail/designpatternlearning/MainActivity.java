@@ -40,6 +40,8 @@ import com.snail.designpatternlearning.FacadeMethod.Michelin;
 import com.snail.designpatternlearning.FactoryMethod.Factory;
 import com.snail.designpatternlearning.FactoryMethod.IDCardFactory;
 import com.snail.designpatternlearning.FactoryMethod.Product;
+import com.snail.designpatternlearning.FlyweightMethod.Flyweight;
+import com.snail.designpatternlearning.FlyweightMethod.FlyweightFactory;
 import com.snail.designpatternlearning.IteratorMethod.Iterator;
 import com.snail.designpatternlearning.IteratorMethod.Phone;
 import com.snail.designpatternlearning.IteratorMethod.PhoneCollection;
@@ -113,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         observerMethod();
         mementoMethod();
         stateMethod();
+        flyweightMethod();
     }
 
 
@@ -380,5 +383,12 @@ public class MainActivity extends AppCompatActivity {
         SafeHome safeHome = new SafeHome();
         safeHome.setLock(Calendar.HOUR_OF_DAY);
         safeHome.recordLog("使用库房");
+    }
+
+    /**
+     * 共享模式（享元模式）
+     */
+    public void flyweightMethod() {
+        FlyweightFactory.getFlyweight("Car");
     }
 }
