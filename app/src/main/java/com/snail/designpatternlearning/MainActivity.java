@@ -61,6 +61,10 @@ import com.snail.designpatternlearning.PrototypeMethod.ElectronicsProduct;
 import com.snail.designpatternlearning.PrototypeMethod.IPadLine;
 import com.snail.designpatternlearning.PrototypeMethod.IPhoneLine;
 import com.snail.designpatternlearning.PrototypeMethod.Manager;
+import com.snail.designpatternlearning.ProxyMethod.DynamicProxy;
+import com.snail.designpatternlearning.ProxyMethod.ISubject;
+import com.snail.designpatternlearning.ProxyMethod.RealSubject;
+import com.snail.designpatternlearning.ProxyMethod.StaticProxy;
 import com.snail.designpatternlearning.SimpleFactoryMethod.EasyFactory;
 import com.snail.designpatternlearning.SimpleFactoryMethod.Operation;
 import com.snail.designpatternlearning.SingleInstanceMethod.Book;
@@ -76,6 +80,9 @@ import com.snail.designpatternlearning.TemplateMethod.BMWCar;
 import com.snail.designpatternlearning.TemplateMethod.BenzCar;
 import com.snail.designpatternlearning.TemplateMethod.CarTemplate;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
@@ -116,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
         mementoMethod();
         stateMethod();
         flyweightMethod();
+        staticProxyMethod();
+        dynamicProxyMethod();
     }
 
 
@@ -390,5 +399,22 @@ public class MainActivity extends AppCompatActivity {
      */
     public void flyweightMethod() {
         FlyweightFactory.getFlyweight("Car");
+    }
+
+
+    /**
+     * 静态代理
+     */
+    public void staticProxyMethod() {
+        StaticProxy proxy = new StaticProxy();
+        proxy.request();
+    }
+
+    /**
+     * 动态代理
+     */
+    public void dynamicProxyMethod() {
+        ISubject proxySubject = DynamicProxy.getProxySubject();
+        proxySubject.request();
     }
 }
