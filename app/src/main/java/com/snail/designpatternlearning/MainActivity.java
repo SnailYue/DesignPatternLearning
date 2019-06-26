@@ -50,6 +50,13 @@ import com.snail.designpatternlearning.FactoryMethod.IDCardFactory;
 import com.snail.designpatternlearning.FactoryMethod.Product;
 import com.snail.designpatternlearning.FlyweightMethod.Flyweight;
 import com.snail.designpatternlearning.FlyweightMethod.FlyweightFactory;
+import com.snail.designpatternlearning.InterpreterMethod.And;
+import com.snail.designpatternlearning.InterpreterMethod.Constant;
+import com.snail.designpatternlearning.InterpreterMethod.Expression;
+import com.snail.designpatternlearning.InterpreterMethod.InterpreterContext;
+import com.snail.designpatternlearning.InterpreterMethod.Not;
+import com.snail.designpatternlearning.InterpreterMethod.Or;
+import com.snail.designpatternlearning.InterpreterMethod.Variable;
 import com.snail.designpatternlearning.IteratorMethod.Iterator;
 import com.snail.designpatternlearning.IteratorMethod.Phone;
 import com.snail.designpatternlearning.IteratorMethod.PhoneCollection;
@@ -134,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
         staticProxyMethod();
         dynamicProxyMethod();
         commandMethod();
+        interpreterMethod();
     }
 
 
@@ -453,14 +461,29 @@ public class MainActivity extends AppCompatActivity {
         NullCommand nullCommand = new NullCommand();
 
         RemoteController remoteController = new RemoteController();
-        remoteController.setCommand("livingRoomLightCommand",livingRoomLightOnCommand,livingRoomLightOffCommand);
-        remoteController.setCommand("bedRoomLightCommand",bedRoomLightOnCommand,bedRoomLightOffCommand);
-        remoteController.setCommand("livingRoomTelevisonCommand",livingRoomTelevisonOnCommand,livingRoomTelevisonOffCommand);
-        remoteController.setCommand("bedRoomTelevisonCommand",bedRoomTelevisonOnCommand,bedRoomTelevisonOffCommand);
-        remoteController.setCommand("nullCommand",nullCommand,nullCommand);
+        remoteController.setCommand("livingRoomLightCommand", livingRoomLightOnCommand, livingRoomLightOffCommand);
+        remoteController.setCommand("bedRoomLightCommand", bedRoomLightOnCommand, bedRoomLightOffCommand);
+        remoteController.setCommand("livingRoomTelevisonCommand", livingRoomTelevisonOnCommand, livingRoomTelevisonOffCommand);
+        remoteController.setCommand("bedRoomTelevisonCommand", bedRoomTelevisonOnCommand, bedRoomTelevisonOffCommand);
+        remoteController.setCommand("nullCommand", nullCommand, nullCommand);
 
         remoteController.offButtonPushed("livingRoomLightCommand");
         remoteController.onButtonPushed("livingRoomLightCommand");
         remoteController.unDoButtonPushed();
+    }
+
+    /**
+     * 解释器模式
+     */
+    public void interpreterMethod() {
+        InterpreterContext context = new InterpreterContext();
+        Expression expression;
+        Variable x = new Variable("x");
+        Variable y = new Variable("y");
+        Constant c = new Constant(true);
+        context.assign(x, false);
+        context.assign(y, true);
+        expression = new Or(new And(c, x), new And(y, new Not(x)));
+        Log.d(TAG, "interpreterMethod: " + expression.interpret(context));
     }
 }
