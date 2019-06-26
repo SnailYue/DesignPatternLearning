@@ -26,6 +26,14 @@ import com.snail.designpatternlearning.ChainOfResponsibilityMethod.MasterFightHa
 import com.snail.designpatternlearning.ChainOfResponsibilityMethod.Protagonist;
 import com.snail.designpatternlearning.ChainOfResponsibilityMethod.SelfFightHandler;
 import com.snail.designpatternlearning.ChainOfResponsibilityMethod.TogetherFightHandler;
+import com.snail.designpatternlearning.CommandMethod.Light;
+import com.snail.designpatternlearning.CommandMethod.LightOffCommand;
+import com.snail.designpatternlearning.CommandMethod.LightOnCommand;
+import com.snail.designpatternlearning.CommandMethod.NullCommand;
+import com.snail.designpatternlearning.CommandMethod.RemoteController;
+import com.snail.designpatternlearning.CommandMethod.Television;
+import com.snail.designpatternlearning.CommandMethod.TelevisonOffCommand;
+import com.snail.designpatternlearning.CommandMethod.TelevisonOnCommand;
 import com.snail.designpatternlearning.CompositeMethod.Directory;
 import com.snail.designpatternlearning.CompositeMethod.Entry;
 import com.snail.designpatternlearning.CompositeMethod.File;
@@ -125,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         flyweightMethod();
         staticProxyMethod();
         dynamicProxyMethod();
+        commandMethod();
     }
 
 
@@ -416,5 +425,42 @@ public class MainActivity extends AppCompatActivity {
     public void dynamicProxyMethod() {
         ISubject proxySubject = DynamicProxy.getProxySubject();
         proxySubject.request();
+    }
+
+
+    /**
+     * 命令模式
+     */
+    public void commandMethod() {
+        Light livingRoomLight = new Light();
+        Light bedRoomLight = new Light();
+
+        Television livingRoomTelevision = new Television();
+        Television bedRoomTelevision = new Television();
+
+        LightOnCommand livingRoomLightOnCommand = new LightOnCommand(livingRoomLight);
+        LightOnCommand bedRoomLightOnCommand = new LightOnCommand(bedRoomLight);
+
+        TelevisonOnCommand livingRoomTelevisonOnCommand = new TelevisonOnCommand(livingRoomTelevision);
+        TelevisonOnCommand bedRoomTelevisonOnCommand = new TelevisonOnCommand(bedRoomTelevision);
+
+        LightOffCommand livingRoomLightOffCommand = new LightOffCommand(livingRoomLight);
+        LightOffCommand bedRoomLightOffCommand = new LightOffCommand(bedRoomLight);
+
+        TelevisonOffCommand livingRoomTelevisonOffCommand = new TelevisonOffCommand(livingRoomTelevision);
+        TelevisonOffCommand bedRoomTelevisonOffCommand = new TelevisonOffCommand(bedRoomTelevision);
+
+        NullCommand nullCommand = new NullCommand();
+
+        RemoteController remoteController = new RemoteController();
+        remoteController.setCommand("livingRoomLightCommand",livingRoomLightOnCommand,livingRoomLightOffCommand);
+        remoteController.setCommand("bedRoomLightCommand",bedRoomLightOnCommand,bedRoomLightOffCommand);
+        remoteController.setCommand("livingRoomTelevisonCommand",livingRoomTelevisonOnCommand,livingRoomTelevisonOffCommand);
+        remoteController.setCommand("bedRoomTelevisonCommand",bedRoomTelevisonOnCommand,bedRoomTelevisonOffCommand);
+        remoteController.setCommand("nullCommand",nullCommand,nullCommand);
+
+        remoteController.offButtonPushed("livingRoomLightCommand");
+        remoteController.onButtonPushed("livingRoomLightCommand");
+        remoteController.unDoButtonPushed();
     }
 }
